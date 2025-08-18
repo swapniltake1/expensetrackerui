@@ -35,11 +35,7 @@ Backend (Spring Boot + JPA + MySQL)
 v
 Database (MySQL)
 
-yaml
-Copy
-Edit
 
----
 
 ## 🔑 Backend APIs  
 
@@ -60,14 +56,11 @@ Edit
 ### 1️⃣ Clone Repositories  
 
 **Backend**  
-```bash
+``` bash
 git clone https://github.com/swapniltake1/expensetrackerapp.git
 cd expensetrackerapp
 Frontend
 
-bash
-Copy
-Edit
 git clone https://github.com/swapniltake1/expensetrackerui.git
 cd expensetrackerui
 2️⃣ Backend Setup (Spring Boot)
@@ -76,24 +69,17 @@ Install Java 17+, Maven, and MySQL
 Update application.properties with your DB credentials
 
 properties
-Copy
-Edit
 spring.datasource.url=jdbc:mysql://localhost:3306/expense_tracker
 spring.datasource.username=root
 spring.datasource.password=yourpassword
 spring.jpa.hibernate.ddl-auto=update
 Run backend:
 
-bash
-Copy
-Edit
 mvn spring-boot:run
 Backend will start at 👉 http://localhost:8080
 
 3️⃣ Frontend Setup (React + Vite)
-bash
-Copy
-Edit
+
 cd expensetrackerui
 npm install
 npm run dev
