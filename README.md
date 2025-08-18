@@ -1,73 +1,120 @@
-# Welcome to your Lovable project
+💰 Expense Tracker Application
 
-## Project info
+A Fullstack Expense Tracker Application built with Spring Boot (Backend) and React + TypeScript (Frontend).
+This project is part of my practice journey, and the next milestone is to integrate AI-powered suggestions for smarter financial management.
 
-**URL**: https://lovable.dev/projects/939bdb23-20e6-4241-8d59-01aed5f0ca61
+📌 Project Overview
 
-## How can I edit this code?
+Backend: Spring Boot, JPA, MySQL
 
-There are several ways of editing your application.
+Frontend: React (TypeScript), Vite, Tailwind CSS, shadcn-ui
 
-**Use Lovable**
+Authentication: JWT (planned)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/939bdb23-20e6-4241-8d59-01aed5f0ca61) and start prompting.
+Deployment: GitHub + Vercel/Netlify (planned)
 
-Changes made via Lovable will be committed automatically to this repo.
+⚡ Features
 
-**Use your preferred IDE**
+✅ Add, update, delete, and view expenses
+✅ Filter expenses by date range and category
+✅ Secure REST APIs with Spring Boot
+✅ Modern React frontend with clean UI
+✅ Scalable database integration
+🚀 Upcoming → AI-powered expense optimization
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🏗️ Architecture
+Frontend (React + TypeScript + Tailwind)
+        |
+        v
+Backend (Spring Boot + JPA + MySQL)
+        |
+        v
+Database (MySQL)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+🔑 Backend APIs
+👤 User APIs
 
-Follow these steps:
+POST /api/users/register → Register a new user
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+POST /api/users/login → User login
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+💰 Expense APIs
 
-# Step 3: Install the necessary dependencies.
-npm i
+GET /api/expenses?start={date}&end={date}&category={category} → Get expenses (with optional filters)
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+POST /api/expenses → Add a new expense
+
+PUT /api/expenses/{id} → Update an expense
+
+DELETE /api/expenses/{id} → Delete an expense
+
+🛠️ Installation & Setup
+1️⃣ Clone Repositories
+# Backend
+git clone https://github.com/swapniltake1/expense-tracker-backend.git
+cd expense-tracker-backend
+
+# Frontend
+git clone https://github.com/swapniltake1/expense-tracker-frontend.git
+cd expense-tracker-frontend
+
+2️⃣ Backend Setup (Spring Boot)
+
+Install Java 17+, Maven, and MySQL.
+
+Update application.properties with your DB credentials.
+
+spring.datasource.url=jdbc:mysql://localhost:3306/expense_tracker
+spring.datasource.username=root
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+
+
+Run backend:
+
+mvn spring-boot:run
+
+
+Backend will start at http://localhost:8080
+
+3️⃣ Frontend Setup (React + Vite)
+cd expense-tracker-frontend
+npm install
 npm run dev
-```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Frontend will start at http://localhost:5173
 
-**Use GitHub Codespaces**
+🚀 Deployment
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Backend: Deploy on Render / Railway / AWS EC2
 
-## What technologies are used for this project?
+Frontend: Deploy on Vercel / Netlify / GitHub Pages
 
-This project is built with:
+🧭 Roadmap
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+ Add user authentication with JWT
 
-## How can I deploy this project?
+ Build expense analytics dashboard
 
-Simply open [Lovable](https://lovable.dev/projects/939bdb23-20e6-4241-8d59-01aed5f0ca61) and click on Share -> Publish.
+ AI-based expense categorization & suggestions
 
-## Can I connect a custom domain to my Lovable project?
+ Add charts for better visualization
 
-Yes, you can!
+ Mobile responsive UI
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+🤝 Contributing
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Fork the repo
+
+Create a new branch (feature/your-feature)
+
+Commit your changes
+
+Push the branch
+
+Open a Pull Request 🚀
+
+📜 License
+
+This project is licensed under the MIT License – free to use and modify.
