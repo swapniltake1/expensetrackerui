@@ -1,9 +1,9 @@
-💰 Expense Tracker Application
+# 💰 Expense Tracker Application
 
 A Fullstack Expense Tracker Application built with Spring Boot (Backend) and React + TypeScript (Frontend).
 This project is part of my practice journey, and the next milestone is to integrate AI-powered suggestions for smarter financial management.
 
-📌 Project Overview
+# 📌 Project Overview
 
 Backend: Spring Boot, JPA, MySQL
 
@@ -13,7 +13,7 @@ Authentication: JWT (planned)
 
 Deployment: GitHub + Vercel/Netlify (planned)
 
-⚡ Features
+# ⚡ Features
 
 ✅ Add, update, delete, and view expenses
 ✅ Filter expenses by date range and category
@@ -22,7 +22,7 @@ Deployment: GitHub + Vercel/Netlify (planned)
 ✅ Scalable database integration
 🚀 Upcoming → AI-powered expense optimization
 
-🏗️ Architecture
+# 🏗️ Architecture
 Frontend (React + TypeScript + Tailwind)
         |
         v
@@ -38,8 +38,8 @@ POST /api/users/register → Register a new user
 
 POST /api/users/login → User login
 
-💰 Expense APIs
-
+# 💰 Expense APIs
+```
 GET /api/expenses?start={date}&end={date}&category={category} → Get expenses (with optional filters)
 
 POST /api/expenses → Add a new expense
@@ -48,17 +48,19 @@ PUT /api/expenses/{id} → Update an expense
 
 DELETE /api/expenses/{id} → Delete an expense
 
-🛠️ Installation & Setup
+
+
+# 🛠️ Installation & Setup
 1️⃣ Clone Repositories
 # Backend
-git clone https://github.com/swapniltake1/expense-tracker-backend.git
-cd expense-tracker-backend
+``` git clone https://github.com/swapniltake1/expensetrackerapp.git ```
+
 
 # Frontend
-git clone https://github.com/swapniltake1/expense-tracker-frontend.git
-cd expense-tracker-frontend
+``` git clone https://github.com/swapniltake1/expensetrackerui.git ```
 
-2️⃣ Backend Setup (Spring Boot)
+
+# 2️⃣ Backend Setup (Spring Boot)
 
 Install Java 17+, Maven, and MySQL.
 
@@ -70,14 +72,14 @@ spring.datasource.password=yourpassword
 spring.jpa.hibernate.ddl-auto=update
 
 
-Run backend:
+``` Run backend:
 
-mvn spring-boot:run
+mvn spring-boot:run ```
 
 
 Backend will start at http://localhost:8080
 
-3️⃣ Frontend Setup (React + Vite)
+# 3️⃣ Frontend Setup (React + Vite)
 cd expense-tracker-frontend
 npm install
 npm run dev
@@ -85,13 +87,13 @@ npm run dev
 
 Frontend will start at http://localhost:5173
 
-🚀 Deployment
+# 🚀 Deployment
 
 Backend: Deploy on Render / Railway / AWS EC2
 
 Frontend: Deploy on Vercel / Netlify / GitHub Pages
 
-🧭 Roadmap
+# 🧭 Roadmap
 
  Add user authentication with JWT
 
@@ -103,7 +105,7 @@ Frontend: Deploy on Vercel / Netlify / GitHub Pages
 
  Mobile responsive UI
 
-🤝 Contributing
+# 🤝 Contributing
 
 Fork the repo
 
@@ -115,6 +117,6 @@ Push the branch
 
 Open a Pull Request 🚀
 
-📜 License
+# 📜 License
 
 This project is licensed under the MIT License – free to use and modify.
