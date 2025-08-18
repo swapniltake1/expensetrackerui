@@ -1,100 +1,110 @@
 # 💰 Expense Tracker Application
 
-A Fullstack Expense Tracker Application built with Spring Boot (Backend) and React + TypeScript (Frontend).
-This project is part of my practice journey, and the next milestone is to integrate AI-powered suggestions for smarter financial management.
+A **Fullstack Expense Tracker Application** built with **Spring Boot (Backend)** and **React + TypeScript (Frontend)**.  
+This project is part of my **practice journey**, and the next milestone is to integrate **AI-powered suggestions** for smarter financial management.
 
-# 📌 Project Overview
+---
 
-Backend: Spring Boot, JPA, MySQL
+## 📌 Project Overview
 
-Frontend: React (TypeScript), Vite, Tailwind CSS, shadcn-ui
+- **Backend**: Spring Boot, JPA, MySQL  
+- **Frontend**: React (TypeScript), Vite, Tailwind CSS, shadcn-ui  
+- **Authentication**: JWT (planned)  
+- **Deployment**: GitHub + Vercel/Netlify (planned)  
 
-Authentication: JWT (planned)
+---
 
-Deployment: GitHub + Vercel/Netlify (planned)
+## ⚡ Features
 
-# ⚡ Features
+- ✅ Add, update, delete, and view expenses  
+- ✅ Filter expenses by **date range** and **category**  
+- ✅ Secure REST APIs with Spring Boot  
+- ✅ Modern React frontend with clean UI  
+- ✅ Scalable database integration  
+- 🚀 Upcoming → **AI-powered expense optimization**  
 
-✅ Add, update, delete, and view expenses
-✅ Filter expenses by date range and category
-✅ Secure REST APIs with Spring Boot
-✅ Modern React frontend with clean UI
-✅ Scalable database integration
-🚀 Upcoming → AI-powered expense optimization
+---
 
-# 🏗️ Architecture
+## 🏗️ Architecture  
+
 Frontend (React + TypeScript + Tailwind)
-        |
-        v
+|
+v
 Backend (Spring Boot + JPA + MySQL)
-        |
-        v
+|
+v
 Database (MySQL)
 
-🔑 Backend APIs
-👤 User APIs
+yaml
+Copy
+Edit
 
-POST /api/users/register → Register a new user
+---
 
-POST /api/users/login → User login
+## 🔑 Backend APIs  
 
-# 💰 Expense APIs
-```
-GET /api/expenses?start={date}&end={date}&category={category} → Get expenses (with optional filters)
+### 👤 User APIs  
+- `POST /api/users/register` → Register a new user  
+- `POST /api/users/login` → User login  
 
-POST /api/expenses → Add a new expense
+### 💰 Expense APIs  
+- `GET /api/expenses?start={date}&end={date}&category={category}` → Get expenses (with optional filters)  
+- `POST /api/expenses` → Add a new expense  
+- `PUT /api/expenses/{id}` → Update an expense  
+- `DELETE /api/expenses/{id}` → Delete an expense  
 
-PUT /api/expenses/{id} → Update an expense
+---
 
-DELETE /api/expenses/{id} → Delete an expense
+## 🛠️ Installation & Setup  
 
+### 1️⃣ Clone Repositories  
 
+**Backend**  
+```bash
+git clone https://github.com/swapniltake1/expensetrackerapp.git
+cd expensetrackerapp
+Frontend
 
-# 🛠️ Installation & Setup
-1️⃣ Clone Repositories
-# Backend
-``` git clone https://github.com/swapniltake1/expensetrackerapp.git ```
+bash
+Copy
+Edit
+git clone https://github.com/swapniltake1/expensetrackerui.git
+cd expensetrackerui
+2️⃣ Backend Setup (Spring Boot)
+Install Java 17+, Maven, and MySQL
 
+Update application.properties with your DB credentials
 
-# Frontend
-``` git clone https://github.com/swapniltake1/expensetrackerui.git ```
-
-
-# 2️⃣ Backend Setup (Spring Boot)
-
-Install Java 17+, Maven, and MySQL.
-
-Update application.properties with your DB credentials.
-
+properties
+Copy
+Edit
 spring.datasource.url=jdbc:mysql://localhost:3306/expense_tracker
 spring.datasource.username=root
 spring.datasource.password=yourpassword
 spring.jpa.hibernate.ddl-auto=update
+Run backend:
 
+bash
+Copy
+Edit
+mvn spring-boot:run
+Backend will start at 👉 http://localhost:8080
 
-``` Run backend:
-
-mvn spring-boot:run ```
-
-
-Backend will start at http://localhost:8080
-
-# 3️⃣ Frontend Setup (React + Vite)
-cd expense-tracker-frontend
+3️⃣ Frontend Setup (React + Vite)
+bash
+Copy
+Edit
+cd expensetrackerui
 npm install
 npm run dev
+Frontend will start at 👉 http://localhost:5173
 
-
-Frontend will start at http://localhost:5173
-
-# 🚀 Deployment
-
+🚀 Deployment
 Backend: Deploy on Render / Railway / AWS EC2
 
 Frontend: Deploy on Vercel / Netlify / GitHub Pages
 
-# 🧭 Roadmap
-
+🧭 Roadmap
  Add user authentication with JWT
 
  Build expense analytics dashboard
@@ -105,8 +115,7 @@ Frontend: Deploy on Vercel / Netlify / GitHub Pages
 
  Mobile responsive UI
 
-# 🤝 Contributing
-
+🤝 Contributing
 Fork the repo
 
 Create a new branch (feature/your-feature)
@@ -117,6 +126,7 @@ Push the branch
 
 Open a Pull Request 🚀
 
-# 📜 License
-
+📜 License
 This project is licensed under the MIT License – free to use and modify.
+
+
