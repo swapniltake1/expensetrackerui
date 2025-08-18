@@ -2,116 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Professional Fintech Design System - All colors MUST be HSL */
+/* Futuristic Cyberpunk Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    /* Core fintech color palette */
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Futuristic dark base */
+    --background: 250 20% 8%;
+    --foreground: 300 20% 96%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 248 25% 10%;
+    --card-foreground: 300 20% 96%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 248 25% 10%;
+    --popover-foreground: 300 20% 96%;
 
-    /* Primary: Professional blue/teal */
-    --primary: 200 100% 50%;
-    --primary-foreground: 240 10% 3.9%;
-    --primary-glow: 200 100% 65%;
+    /* Primary: Electric cyan/purple */
+    --primary: 280 100% 70%;
+    --primary-foreground: 250 20% 8%;
+    --primary-glow: 285 100% 80%;
 
-    /* Secondary: Subtle background variations */
-    --secondary: 240 4% 16%;
-    --secondary-foreground: 0 0% 98%;
+    /* Secondary: Deep purple variations */
+    --secondary: 260 30% 15%;
+    --secondary-foreground: 300 20% 96%;
 
-    --muted: 240 6% 10%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 255 25% 12%;
+    --muted-foreground: 270 15% 65%;
 
-    /* Accent: Success green for positive values */
-    --accent: 142 76% 36%;
-    --accent-foreground: 0 0% 98%;
+    /* Accent: Electric green/cyan for highlights */
+    --accent: 170 100% 50%;
+    --accent-foreground: 250 20% 8%;
 
-    /* Financial colors */
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 98%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 240 10% 3.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    /* Futuristic status colors */
+    --success: 150 100% 45%;
+    --success-foreground: 250 20% 8%;
+    --warning: 45 100% 60%;
+    --warning-foreground: 250 20% 8%;
+    --destructive: 350 100% 65%;
+    --destructive-foreground: 250 20% 8%;
 
-    --border: 240 6% 20%;
-    --input: 240 6% 20%;
-    --ring: 200 100% 50%;
+    --border: 260 25% 18%;
+    --input: 260 25% 18%;
+    --ring: 280 100% 70%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Financial app gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(200 100% 50%), hsl(200 100% 65%));
-    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
-    --gradient-card: linear-gradient(135deg, hsl(240 10% 3.9%), hsl(240 6% 10%));
-    --gradient-hero: linear-gradient(135deg, hsl(240 10% 3.9%) 0%, hsl(240 6% 10%) 100%);
+    /* Cyberpunk gradients with neon vibes */
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(200 100% 70%), hsl(170 100% 50%));
+    --gradient-success: linear-gradient(135deg, hsl(150 100% 45%), hsl(170 100% 50%));
+    --gradient-card: linear-gradient(135deg, hsl(248 25% 10%) 0%, hsl(255 25% 12%) 50%, hsl(260 30% 15%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(250 20% 8%) 0%, hsl(255 25% 12%) 50%, hsl(280 100% 70% / 0.1) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(280 100% 70%), hsl(200 100% 70%), hsl(170 100% 50%), hsl(280 100% 70%));
     
-    /* Shadows and effects */
-    --shadow-primary: 0 10px 30px -10px hsl(200 100% 50% / 0.3);
-    --shadow-card: 0 4px 20px -4px hsl(240 10% 3.9% / 0.3);
-    --shadow-glow: 0 0 40px hsl(200 100% 65% / 0.15);
+    /* Glowing shadows and neon effects */
+    --shadow-primary: 0 0 30px hsl(280 100% 70% / 0.5), 0 10px 40px hsl(280 100% 70% / 0.2);
+    --shadow-card: 0 8px 32px hsl(280 100% 70% / 0.1), 0 4px 16px hsl(248 25% 10% / 0.8);
+    --shadow-glow: 0 0 60px hsl(280 100% 70% / 0.3), 0 0 100px hsl(200 100% 70% / 0.1);
+    --shadow-neon: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 80px currentColor;
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  /* Light mode - clean fintech aesthetic */
+  /* Light mode - futuristic clean aesthetic */
   .light {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 200 100% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 45.1%;
-    --accent: 142 76% 36%;
-    --accent-foreground: 0 0% 100%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 200 100% 50%;
+    --background: 300 20% 98%;
+    --foreground: 250 20% 8%;
+    --card: 300 30% 96%;
+    --card-foreground: 250 20% 8%;
+    --popover: 300 30% 96%;
+    --popover-foreground: 250 20% 8%;
+    --primary: 280 100% 60%;
+    --primary-foreground: 300 20% 98%;
+    --secondary: 280 20% 92%;
+    --secondary-foreground: 250 20% 8%;
+    --muted: 280 20% 94%;
+    --muted-foreground: 260 15% 40%;
+    --accent: 170 100% 35%;
+    --accent-foreground: 300 20% 98%;
+    --border: 270 20% 85%;
+    --input: 270 20% 85%;
+    --ring: 280 100% 60%;
     
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(240 4.8% 95.9%) 100%);
-    --shadow-card: 0 4px 20px -4px hsl(240 10% 3.9% / 0.08);
+    --gradient-hero: linear-gradient(135deg, hsl(300 20% 98%) 0%, hsl(280 20% 92%) 50%, hsl(280 100% 60% / 0.1) 100%);
+    --shadow-card: 0 8px 32px hsl(280 100% 60% / 0.1), 0 4px 16px hsl(300 30% 96% / 0.8);
   }
 
-  /* Sidebar styling */
+  /* Futuristic Sidebar styling */
   :root {
-    --sidebar-background: 240 10% 3.9%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 200 100% 50%;
-    --sidebar-primary-foreground: 240 10% 3.9%;
-    --sidebar-accent: 240 6% 20%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 240 6% 20%;
-    --sidebar-ring: 200 100% 50%;
+    --sidebar-background: 248 25% 10%;
+    --sidebar-foreground: 300 20% 96%;
+    --sidebar-primary: 280 100% 70%;
+    --sidebar-primary-foreground: 250 20% 8%;
+    --sidebar-accent: 260 25% 18%;
+    --sidebar-accent-foreground: 300 20% 96%;
+    --sidebar-border: 260 25% 18%;
+    --sidebar-ring: 280 100% 70%;
   }
 }
 
@@ -145,35 +131,106 @@
 }
 
 @layer components {
-  /* Financial card component */
+  /* Futuristic card components */
   .finance-card {
-    @apply bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300;
-    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+    background: var(--gradient-card);
+    @apply border border-border/20 rounded-2xl p-6 shadow-card hover:shadow-glow transition-all duration-500;
+    backdrop-filter: blur(12px);
   }
 
-  /* Primary gradient button */
+  /* Cyberpunk gradient buttons */
   .btn-gradient-primary {
     background: var(--gradient-primary);
-    @apply text-primary-foreground font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+    @apply text-primary-foreground font-bold px-8 py-4 rounded-2xl shadow-glow hover:shadow-neon transform hover:scale-105 transition-all duration-300;
+    animation: glow-pulse 2s ease-in-out infinite alternate;
   }
 
-  /* Success variant */
   .btn-gradient-success {
     background: var(--gradient-success);
-    @apply text-success-foreground font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+    @apply text-success-foreground font-bold px-8 py-4 rounded-2xl shadow-glow hover:shadow-neon transform hover:scale-105 transition-all duration-300;
   }
 
-  /* Financial metrics display */
+  /* Neon accent button */
+  .btn-neon {
+    @apply bg-transparent border-2 border-accent text-accent font-bold px-6 py-3 rounded-2xl;
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-neon:hover {
+    @apply bg-accent text-accent-foreground;
+    box-shadow: 0 0 30px hsl(var(--accent) / 0.6), 0 0 60px hsl(var(--accent) / 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Futuristic metric cards with glass morphism */
   .metric-card {
-    @apply bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 hover:bg-card/80 transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.8) 0%, hsl(var(--muted) / 0.9) 100%);
+    @apply backdrop-blur-xl border border-border/30 rounded-3xl p-8 hover:border-primary/50 transition-all duration-500;
+    box-shadow: var(--shadow-card), inset 0 1px 0 hsl(var(--foreground) / 0.1);
   }
 
-  /* Glow effects for important elements */
+  /* Neon glow effects */
   .glow-primary {
     box-shadow: var(--shadow-primary);
+    animation: primary-glow 3s ease-in-out infinite alternate;
   }
 
   .glow-card {
     box-shadow: var(--shadow-card);
   }
+
+  .glow-neon {
+    box-shadow: var(--shadow-glow);
+    animation: neon-flicker 4s ease-in-out infinite;
+  }
+
+  /* Animated background gradient */
+  .bg-animated {
+    background: var(--gradient-neon);
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  /* Cyberpunk grid pattern */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Hologram effect */
+  .hologram {
+    background: linear-gradient(135deg, transparent 0%, hsl(var(--primary) / 0.1) 50%, transparent 100%);
+    animation: hologram-scan 3s linear infinite;
+  }
+}
+
+/* Futuristic animations */
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+  100% { box-shadow: 0 0 40px hsl(var(--primary) / 0.8), 0 0 80px hsl(var(--primary) / 0.2); }
+}
+
+@keyframes primary-glow {
+  0% { box-shadow: 0 0 30px hsl(var(--primary) / 0.5); }
+  100% { box-shadow: 0 0 60px hsl(var(--primary) / 0.8), 0 0 100px hsl(var(--primary) / 0.3); }
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  75% { opacity: 0.9; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes hologram-scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100vw); }
 }
