@@ -59,11 +59,14 @@ Database (MySQL)
 ``` bash
 git clone https://github.com/swapniltake1/expensetrackerapp.git
 cd expensetrackerapp
+
 Frontend
 
 git clone https://github.com/swapniltake1/expensetrackerui.git
 cd expensetrackerui
-2️⃣ Backend Setup (Spring Boot)
+```
+## 2️⃣ Backend Setup (Spring Boot)
+```
 Install Java 17+, Maven, and MySQL
 
 Update application.properties with your DB credentials
@@ -77,31 +80,32 @@ Run backend:
 
 mvn spring-boot:run
 Backend will start at 👉 http://localhost:8080
-
-3️⃣ Frontend Setup (React + Vite)
-
+```
+## 3️⃣ Frontend Setup (React + Vite)
+```
 cd expensetrackerui
 npm install
 npm run dev
 Frontend will start at 👉 http://localhost:5173
+```
+## 🚀 Deployment
 
-🚀 Deployment
 Backend: Deploy on Render / Railway / AWS EC2
 
 Frontend: Deploy on Vercel / Netlify / GitHub Pages
 
-🧭 Roadmap
+## 🧭 Roadmap
  Add user authentication with JWT
 
  Build expense analytics dashboard
 
- AI-based expense categorization & suggestions
+ ## AI-based expense categorization & suggestions
 
  Add charts for better visualization
 
  Mobile responsive UI
 
-🤝 Contributing
+## 🤝 Contributing
 Fork the repo
 
 Create a new branch (feature/your-feature)
@@ -112,7 +116,7 @@ Push the branch
 
 Open a Pull Request 🚀
 
-📜 License
+## 📜 License
 This project is licensed under the MIT License – free to use and modify.
 
 
