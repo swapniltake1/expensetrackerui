@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Register = () => {
-  const [name, setName] = useState("");   // ✅ full name
+  const [username, setUsername] = useState("");   // ✅ full name
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,7 +26,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      await register({ name, email, password });
+      await register({ username, email, password });
       navigate("/dashboard");
     } catch (error) {
       console.error("Registration failed", error);
@@ -51,8 +51,8 @@ const Register = () => {
                 id="name"
                 type="text"
                 placeholder="Enter your full name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
                 disabled={loading}
               />
