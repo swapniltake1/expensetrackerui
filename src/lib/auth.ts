@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 // Configure axios defaults
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = "http://localhost:8080/api";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -9,7 +9,7 @@ export const api = axios.create({
 
 // Add token to requests
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -21,8 +21,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+      localStorage.removeItem("token");
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   }
@@ -31,8 +31,9 @@ api.interceptors.response.use(
 // Auth types
 export interface User {
   id: string;
+  username: string;  // ✅ real name
   email: string;
-  name: string;
+  role: string;
 }
 
 export interface LoginCredentials {
@@ -41,7 +42,7 @@ export interface LoginCredentials {
 }
 
 export interface RegisterCredentials {
-  name: string;
+  username: string;   // ✅ use username instead of name
   email: string;
   password: string;
 }
@@ -49,12 +50,24 @@ export interface RegisterCredentials {
 // Auth API calls
 export const authAPI = {
   login: async (credentials: LoginCredentials) => {
-    const response = await api.post('/auth/login', credentials);
+    const response = await api.post("/auth/login", {
+      username: credentials.email, // Spring Security uses "username"
+      password: credentials.password,
+    });
+    return response.data; // { token }
+  },
+
+  register: async (credentials: RegisterCredentials) => {
+    const response = await api.post("/auth/register", {
+      username: credentials.username, // ✅ real name goes here
+      email: credentials.email,
+      password: credentials.password,
+    });
     return response.data;
   },
-  
-  register: async (credentials: RegisterCredentials) => {
-    const response = await api.post('/auth/register', credentials);
+
+  getProfile: async (): Promise<User> => {
+    const response = await api.get("/auth/me");
     return response.data;
   },
 };
@@ -62,18 +75,9 @@ export const authAPI = {
 // Token management
 export const tokenManager = {
   setToken: (token: string) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   },
-  
-  getToken: () => {
-    return localStorage.getItem('token');
-  },
-  
-  removeToken: () => {
-    localStorage.removeItem('token');
-  },
-  
-  isAuthenticated: () => {
-    return !!localStorage.getItem('token');
-  }
+  getToken: () => localStorage.getItem("token"),
+  removeToken: () => localStorage.removeItem("token"),
+  isAuthenticated: () => !!localStorage.getItem("token"),
 };

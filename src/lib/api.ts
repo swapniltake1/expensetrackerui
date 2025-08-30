@@ -30,9 +30,10 @@ export interface Budget {
   spent: number;
 }
 
+
 export interface SetBudgetRequest {
   month: string;
-  amount: number;
+  limitAmount: number; // ✅ must match backend
 }
 
 // Expense API
@@ -47,13 +48,14 @@ export const expenseAPI = {
     return response.data;
   },
 
+  // 🚨 remove this OR add endpoint in backend
   getById: async (id: string) => {
-    const response = await api.get(`/expenses/${id}`);
-    return response.data;
-  },
+   const response = await api.get(`/expenses/${id}`);
+     return response.data;
+   },
 
   create: async (expense: CreateExpenseRequest) => {
-    const response = await api.post('/expenses', expense);
+    const response = await api.post('/expenses/create', expense); // ✅ fixed
     return response.data;
   },
 
@@ -66,6 +68,7 @@ export const expenseAPI = {
     await api.delete(`/expenses/${id}`);
   },
 };
+
 
 // Budget API
 export const budgetAPI = {

@@ -66,8 +66,8 @@ const Sidebar: React.FC = () => {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-sidebar-foreground truncate">
-              {user?.name || 'User'}
-            </p>
+               {user?.name || user?.email.split('@')[0]}
+           </p>
             <p className="text-xs text-sidebar-foreground/60 truncate">
               {user?.email}
             </p>

@@ -29,15 +29,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // 🔹 Restore session on mount
   useEffect(() => {
-    // Check if user is already authenticated
-    const token = tokenManager.getToken();
-    if (token) {
-      // In a real app, you'd validate the token with the server
-      // For now, we'll assume the token is valid
-      setUser({ id: '1', email: 'user@example.com', name: 'User' });
-    }
-    setLoading(false);
+    const initializeAuth = async () => {
+      const token = tokenManager.getToken();
+      if (token) {
+        try {
+          // Call backend to validate and fetch user
+          const profile = await authAPI.getProfile(); // 👈 must implement in your API
+          setUser(profile);
+        } catch (error) {
+          tokenManager.removeToken();
+          setUser(null);
+        }
+      }
+      setLoading(false);
+    };
+
+    initializeAuth();
   }, []);
 
   const login = async (credentials: LoginCredentials) => {
@@ -47,7 +56,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       if (response.token) {
         tokenManager.setToken(response.token);
-        setUser(response.user || { id: '1', email: credentials.email, name: 'User' });
+        const profile = await authAPI.getProfile(); // fetch latest user
+        setUser(profile);
         toast({
           title: "Welcome back!",
           description: "You've been successfully logged in.",
@@ -73,7 +83,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       if (response.token) {
         tokenManager.setToken(response.token);
-        setUser(response.user || { id: '1', email: credentials.email, name: credentials.name });
+        const profile = await authAPI.getProfile(); // fetch latest user
+        setUser(profile);
         toast({
           title: "Account Created",
           description: "Your account has been created successfully.",
@@ -112,7 +123,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );
 };

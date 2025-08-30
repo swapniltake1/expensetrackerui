@@ -1,10 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { DollarSign, TrendingUp, TrendingDown, Target } from 'lucide-react';
-import ExpenseTrendChart from '@/components/charts/ExpenseTrendChart';
-import CategoryPieChart from '@/components/charts/CategoryPieChart';
-import { expenseAPI, budgetAPI } from '@/lib/api';
-import { format } from 'date-fns';
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DollarSign,
+  TrendingUp,
+  TrendingDown,
+  Target,
+} from "lucide-react";
+import ExpenseTrendChart from "@/components/charts/ExpenseTrendChart";
+import CategoryPieChart from "@/components/charts/CategoryPieChart";
+import { expenseAPI, budgetAPI } from "@/lib/api";
+import { format, subDays } from "date-fns";
 
 const Dashboard: React.FC = () => {
   const [stats, setStats] = useState({
@@ -13,14 +24,19 @@ const Dashboard: React.FC = () => {
     budgetProgress: 0,
     expenseChange: 0,
   });
+  const [trendData, setTrendData] = useState<any[]>([]);
+  const [categoryData, setCategoryData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadDashboardData = async () => {
       try {
-        const currentMonth = format(new Date(), 'yyyy-MM');
+        const currentMonth = format(new Date(), "yyyy-MM");
         const startOfMonth = `${currentMonth}-01`;
-        const endOfMonth = format(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0), 'yyyy-MM-dd');
+        const endOfMonth = format(
+          new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
+          "yyyy-MM-dd"
+        );
 
         // Get current month expenses
         const monthlyExpenses = await expenseAPI.getAll({
@@ -28,28 +44,69 @@ const Dashboard: React.FC = () => {
           end: endOfMonth,
         });
 
-        // Get all expenses for total
+        // Get all expenses
         const allExpenses = await expenseAPI.getAll();
 
-        // Get budget for current month
+        // Budget for current month
         let budget = null;
         try {
           budget = await budgetAPI.get(currentMonth);
-        } catch (error) {
-          // Budget not set
+        } catch {
+          // no budget
         }
 
-        const monthlyTotal = monthlyExpenses.reduce((sum: number, exp: any) => sum + exp.amount, 0);
-        const totalAmount = allExpenses.reduce((sum: number, exp: any) => sum + exp.amount, 0);
-        
+        const monthlyTotal = monthlyExpenses.reduce(
+          (sum: number, exp: any) => sum + exp.amount,
+          0
+        );
+        const totalAmount = allExpenses.reduce(
+          (sum: number, exp: any) => sum + exp.amount,
+          0
+        );
+
+        // ✅ Build trend data (last 30 days)
+        const last30Days = subDays(new Date(), 30);
+        const trendMap: Record<string, number> = {};
+        for (let i = 0; i <= 30; i++) {
+          const day = format(subDays(new Date(), i), "yyyy-MM-dd");
+          trendMap[day] = 0;
+        }
+        monthlyExpenses.forEach((exp: any) => {
+          const date = exp.date.split("T")[0]; // assuming ISO string
+          if (trendMap[date] !== undefined) {
+            trendMap[date] += exp.amount;
+          }
+        });
+        const trendArray = Object.keys(trendMap)
+          .sort()
+          .map((date) => ({ date, amount: trendMap[date] }));
+
+        // ✅ Build category data
+const categoryMap: Record<string, number> = {};
+monthlyExpenses.forEach((exp: any) => {
+  categoryMap[exp.category] =
+    (categoryMap[exp.category] || 0) + exp.amount;
+});
+const categoryArray = Object.entries(categoryMap).map(
+  ([category, amount]) => ({
+    category,
+    amount,
+  })
+);
+
+setCategoryData(categoryArray);
+
+
         setStats({
           totalExpenses: totalAmount,
           monthlyExpenses: monthlyTotal,
           budgetProgress: budget ? (monthlyTotal / budget.amount) * 100 : 0,
-          expenseChange: 12.5, // Mock data - would calculate from previous month
+          expenseChange: 12.5, // mock
         });
+        setTrendData(trendArray);
+        setCategoryData(categoryArray);
       } catch (error) {
-        console.error('Failed to load dashboard data:', error);
+        console.error("Failed to load dashboard data:", error);
       } finally {
         setLoading(false);
       }
@@ -58,21 +115,42 @@ const Dashboard: React.FC = () => {
     loadDashboardData();
   }, []);
 
-  const StatCard = ({ title, value, icon: Icon, trend, trendValue, description }: any) => (
+  const StatCard = ({
+    title,
+    value,
+    icon: Icon,
+    trend,
+    trendValue,
+    description,
+  }: any) => (
     <Card className="finance-card">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         <Icon className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">${value.toLocaleString()}</div>
+        <div className="text-2xl font-bold">
+          ${value.toLocaleString()}
+        </div>
         {trend && (
-          <p className={`text-xs flex items-center gap-1 ${trend === 'up' ? 'text-destructive' : 'text-success'}`}>
-            {trend === 'up' ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+          <p
+            className={`text-xs flex items-center gap-1 ${
+              trend === "up" ? "text-destructive" : "text-success"
+            }`}
+          >
+            {trend === "up" ? (
+              <TrendingUp className="h-3 w-3" />
+            ) : (
+              <TrendingDown className="h-3 w-3" />
+            )}
             {trendValue}% from last month
           </p>
         )}
-        {description && <p className="text-xs text-muted-foreground mt-1">{description}</p>}
+        {description && (
+          <p className="text-xs text-muted-foreground mt-1">
+            {description}
+          </p>
+        )}
       </CardContent>
     </Card>
   );
@@ -116,11 +194,15 @@ const Dashboard: React.FC = () => {
           title="Budget Progress"
           value={stats.budgetProgress}
           icon={Target}
-          description={`${Math.round(stats.budgetProgress)}% of monthly budget used`}
+          description={`${Math.round(
+            stats.budgetProgress
+          )}% of monthly budget used`}
         />
         <StatCard
           title="Avg. Daily"
-          value={Math.round(stats.monthlyExpenses / new Date().getDate())}
+          value={Math.round(
+            stats.monthlyExpenses / new Date().getDate()
+          )}
           icon={DollarSign}
           description="Average daily spending this month"
         />
@@ -131,20 +213,24 @@ const Dashboard: React.FC = () => {
         <Card className="finance-card">
           <CardHeader>
             <CardTitle>Expense Trend</CardTitle>
-            <CardDescription>Your spending over the last 30 days</CardDescription>
+            <CardDescription>
+              Your spending over the last 30 days
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <ExpenseTrendChart />
+            <ExpenseTrendChart data={trendData} />
           </CardContent>
         </Card>
 
         <Card className="finance-card">
           <CardHeader>
             <CardTitle>Spending by Category</CardTitle>
-            <CardDescription>Breakdown of your expenses by category</CardDescription>
+            <CardDescription>
+              Breakdown of your expenses by category
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <CategoryPieChart />
+            <CategoryPieChart data={categoryData} />
           </CardContent>
         </Card>
       </div>
