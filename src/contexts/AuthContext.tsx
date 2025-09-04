@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User, authAPI, tokenManager, LoginCredentials, RegisterCredentials } from '@/lib/auth';
+import { User, authAPI, LoginCredentials, RegisterCredentials, tokenManager } from '@/lib/auth';
 import { toast } from '@/hooks/use-toast';
 
 interface AuthContextType {
@@ -15,9 +15,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
   return context;
 };
 
@@ -29,16 +27,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Restore session on mount
+  // Restore session on mount
   useEffect(() => {
     const initializeAuth = async () => {
       const token = tokenManager.getToken();
       if (token) {
         try {
-          // Call backend to validate and fetch user
-          const profile = await authAPI.getProfile(); // 👈 must implement in your API
+          const profile = await authAPI.getProfile();
           setUser(profile);
-        } catch (error) {
+        } catch (err) {
           tokenManager.removeToken();
           setUser(null);
         }
@@ -52,25 +49,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (credentials: LoginCredentials) => {
     try {
       setLoading(true);
-      const response = await authAPI.login(credentials);
-      
-      if (response.token) {
-        tokenManager.setToken(response.token);
-        const profile = await authAPI.getProfile(); // fetch latest user
-        setUser(profile);
-        toast({
-          title: "Welcome back!",
-          description: "You've been successfully logged in.",
-        });
-      }
-    } catch (error: any) {
-      const message = error.response?.data?.message || 'Login failed';
+      await authAPI.login(credentials);
+      const profile = await authAPI.getProfile();
+      setUser(profile);
       toast({
-        title: "Login Failed",
-        description: message,
-        variant: "destructive",
+        title: "Welcome back!",
+        description: "You've been successfully logged in.",
       });
-      throw error;
+    } catch (err: any) {
+      const message = err.response?.data?.message || 'Login failed';
+      toast({ title: "Login Failed", description: message, variant: "destructive" });
+      throw err;
     } finally {
       setLoading(false);
     }
@@ -79,50 +68,30 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (credentials: RegisterCredentials) => {
     try {
       setLoading(true);
-      const response = await authAPI.register(credentials);
-      
-      if (response.token) {
-        tokenManager.setToken(response.token);
-        const profile = await authAPI.getProfile(); // fetch latest user
-        setUser(profile);
-        toast({
-          title: "Account Created",
-          description: "Your account has been created successfully.",
-        });
-      }
-    } catch (error: any) {
-      const message = error.response?.data?.message || 'Registration failed';
+      await authAPI.register(credentials);
+      const profile = await authAPI.getProfile();
+      setUser(profile);
       toast({
-        title: "Registration Failed", 
-        description: message,
-        variant: "destructive",
+        title: "Account Created",
+        description: "Your account has been created successfully.",
       });
-      throw error;
+    } catch (err: any) {
+      const message = err.response?.data?.message || 'Registration failed';
+      toast({ title: "Registration Failed", description: message, variant: "destructive" });
+      throw err;
     } finally {
       setLoading(false);
     }
   };
 
   const logout = () => {
-    tokenManager.removeToken();
+    authAPI.logout();
     setUser(null);
-    toast({
-      title: "Logged Out",
-      description: "You've been successfully logged out.",
-    });
-  };
-
-  const value: AuthContextType = {
-    user,
-    loading,
-    login,
-    register,
-    logout,
-    isAuthenticated: !!user,
+    toast({ title: "Logged Out", description: "You've been successfully logged out." });
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, isAuthenticated: !!user }}>
       {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );

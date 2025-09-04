@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Loader2, DollarSign } from 'lucide-react';
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(''); // keep it email for display
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -17,12 +17,14 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
-      await login({ email, password });
+      // Send email field as "username" to backend
+      await login({ username: email, password });
       navigate('/dashboard');
-    } catch (error) {
-      // Error handled in AuthContext
+    } catch (error: any) {
+      console.error("Login failed:", error.message);
+      alert("Login failed. Check your credentials.");
     } finally {
       setLoading(false);
     }
@@ -49,8 +51,8 @@ const Login: React.FC = () => {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                type="email"
-                placeholder="Enter your email"
+                type="text"
+                placeholder="Enter your username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

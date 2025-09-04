@@ -100,7 +100,7 @@ setCategoryData(categoryArray);
         setStats({
           totalExpenses: totalAmount,
           monthlyExpenses: monthlyTotal,
-          budgetProgress: budget ? (monthlyTotal / budget.amount) * 100 : 0,
+          budgetProgress: budget ? (monthlyTotal / budget.limitAmount) * 100 : 0,
           expenseChange: 12.5, // mock
         });
         setTrendData(trendArray);
